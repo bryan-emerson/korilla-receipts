@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Receipt from './Receipt.js'
 
 let receipts = [
   {
@@ -42,17 +43,18 @@ let receipts = [
     paid: false
   }
 ]
-console.log(receipts[0])
+//console.log(receipts[0])
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = receipts[0];
+    this.state = receipts;
   }
 
   render () {
     return (
       <div>
         <h1 className="truck-name">Korilla Receipts</h1>
+        <Receipt rec = {this.state[0]}/>
       </div>
     )
   }
