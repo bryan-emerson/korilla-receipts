@@ -47,14 +47,38 @@ let receipts = [
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = receipts;
+    this.state ={
+      receipts: receipts
+    };
+  }
+
+  handleChange = (e) => {
+    e.preventDefault()
+    let searchedReciept = [...this.state.receipts].filter(receipt => receipt.person.includes(e.target.value))
+    if (e.target.value === "") {
+      this.setState({
+        receipts: receipts
+      })
+    } else {
+    this.setState({
+      receipts: searchedReciept
+    })
+  }
   }
 
   render () {
+    console.log(this.state.receipts)
+    let paid = [...this.state.receipts].map(receipt => !receipt.paid ? <Receipt rec = {receipt}/> : null)
     return (
       <div>
         <h1 className="truck-name">Korilla Receipts</h1>
-        <Receipt rec = {this.state[0]}/>
+          <div className='container'>
+          {/* <Receipt rec = {this.state[0]}/>
+          <Receipt rec = {this.state[1]}/>
+          <Receipt rec = {this.state[2]}/> */}
+          {paid}
+          </div>
+          <input type='text' onChange={this.handleChange} placeholder='Search Name'/>
       </div>
     )
   }
